@@ -32,7 +32,7 @@ const Hero = () => {
             </button>
           </span>
         </section>
-        <section>
+        <section className="mx-auto">
           <img
             src={ProfileImage}
             alt=""
