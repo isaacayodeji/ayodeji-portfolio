@@ -138,7 +138,7 @@ const Contact = () => {
           <EarthCanvas />
         </motion.div>
       </div>
-      <div className="lg:px-56 py-4">
+      <div className="lg:px-56 py-4 px-4">
         <div className="flex justify-between items-center underline">
           <section className="flex gap-3">
             <a
