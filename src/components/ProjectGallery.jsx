@@ -54,7 +54,7 @@ export function ProjectGallery() {
         "A sleek and responsive personal portfolio website showcasing my skills, projects, and professional background. Built with a focus on clean design and smooth navigation to provide an engaging experience for potential clients and employers.",
       imageSrc: Portfolio,
       technologies: ["React", "Tailwind CSS"],
-      demoUrl: "#",
+      demoUrl: "https://ayodeji-olu-ewulo.vercel.app/",
       repoUrl: "#",
     },
     {
