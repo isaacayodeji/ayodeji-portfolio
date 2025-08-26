@@ -6,7 +6,7 @@ import saveAs from "file-saver";
 const Hero = () => {
   return (
     <div
-      className="h-screen relative md:mx-14"
+      className="md:h-screen relative md:mx-14"
       id="home"
       data-aos="fade-up"
     >
