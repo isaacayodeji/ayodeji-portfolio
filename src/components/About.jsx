@@ -11,7 +11,7 @@ const About = () => {
 
   return (
     <div
-      className="mt-10 px-2 xl:px-36 3xl:ml-36"
+      className="mt-10 px-4 xl:px-36 3xl:ml-36"
       id="about"
       data-aos="fade-up"
       data-aos-anchor="#about"

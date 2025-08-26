@@ -11,7 +11,7 @@ const Hero = () => {
       data-aos="fade-up"
     >
       <div className="lg:absolute md:pt-0 pt-20 inset-0 top-[7rem] 3xl:top-[120px] xl:mt-36 px-5 lg:px-0 max-w-7xl justify-between mx-auto flex flex-wrap items-start gap-5">
-        <section className="">
+        <section className="px-2">
           <div className="text-[1.6rem] lg:text-[3.6rem] font-bold text-[#f5f5f5] font-[poppins-extrabold]">
             Hi 👋, <br /> My name is <br />
             <span className="name">Ayodeji Olu-Ewulo</span>
