@@ -6,7 +6,7 @@ import { ProjectCard } from "./ProjectCard";
 import Zeeticket from "../images/zeeticket.png";
 import Portfolio from "../images/portfolio-image.png";
 import Mts from "../images/mts-website.png";
-
+import XpressWebsite from "../images/xpress-website.png";
 
 // import image from "../images/project-icon/profileImg.jpeg";
 
@@ -64,6 +64,15 @@ export function ProjectGallery() {
       imageSrc: Mts,
       technologies: ["Next.js", "Tailwind CSS"],
       demoUrl: "https://xpressmts.com/products/digital-banking/",
+      repoUrl: "#",
+    },
+    {
+      title: "XpressPayment",
+      description:
+        "Xpress Payment Solutions Limited, incorporated in Nigeria in 2016, specialises in creating and delivering cutting-edge platforms for electronic payments, collections, bills payment and funds disbursement. Operating under CBN Switching and Processing Licence Category, we serve as a Transaction Switching, Payment Solution Service Provider (PSSP), Payment Terminal Service Provider (PTSP), Third Party Processing (TPP) and non-bank acquiring Agent, continually disrupting markets to simplify and enable smarter living for all Africans.",
+      imageSrc: XpressWebsite,
+      technologies: ["Next.js", "Tailwind CSS", "C#", "CMS"],
+      demoUrl: "https://xpresspayments.com",
       repoUrl: "#",
     },
   ];
