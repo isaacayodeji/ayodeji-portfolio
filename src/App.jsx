@@ -1,47 +1,31 @@
-import React, { useEffect } from "react";
-import Navbar from "./components/Navbar";
-import { ConfigProvider } from "antd";
-import Hero from "./components/Hero";
-import About from "./components/About";
-import Stack from "./components/stack";
-import Experience from "./components/exprience";
-import Contact from "./components/contact";
-import Aos from "aos";
-import "aos/dist/aos.css";
-import { FloatButton } from "antd";
-import StarsCanvas from "./components/canvas/Stars";
-import Certification from "./components/Certification";
-import Project from "./components/Project";
+import { motion, useScroll, useSpring } from "framer-motion";
+import Nav from "./components/Nav.jsx";
+import Hero from "./components/Hero.jsx";
+import About from "./components/About.jsx";
+import Experience from "./components/Experience.jsx";
+import Work from "./components/Work.jsx";
+import Skills from "./components/Skills.jsx";
+import Contact from "./components/Contact.jsx";
 
-const App = () => {
-  useEffect(() => {
-    Aos.init();
-  }, []);
+export default function App() {
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 28 });
 
   return (
-    <ConfigProvider
-      theme={{
-        token: { colorPrimary: "#050816" }
-      }}
-    >
-      <div className=" bg-[#050816] text-white">
-        <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
-          <Navbar />
-          <Hero />
-        </div>
-          <About />
-          <Stack />
-          <Project/>
-          <Experience />
-          <Certification />
-          <div className='relative z-0'>
-          <Contact />
-          <StarsCanvas />
-        </div>
-      </div> 
-      <FloatButton.BackTop />
-    </ConfigProvider>
+    <>
+      <motion.div className="progress" style={{ scaleX: progress }} />
+      <div className="aurora" aria-hidden="true">
+        <span /><span /><span />
+      </div>
+      <Nav />
+      <main>
+        <Hero />
+        <About />
+        <Experience />
+        <Work />
+        <Skills />
+        <Contact />
+      </main>
+    </>
   );
-};
-
-export default App;
+}
