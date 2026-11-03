@@ -1,6 +1,6 @@
 # Ayodeji Olu-Ewulo — Portfolio
 
-Personal portfolio built with React, Vite and Framer Motion.
+Personal portfolio built with React, Vite, Framer Motion, Three.js and Lenis.
 
 **Live:** https://isaacayodeji.github.io/ayodeji-portfolio/
 
@@ -10,6 +10,7 @@ Personal portfolio built with React, Vite and Framer Motion.
 npm install
 npm run dev      # http://localhost:5173
 npm run build    # outputs ./dist
+npm run preview  # serves ./dist at http://localhost:4173 (opening dist/index.html from disk won't work)
 ```
 
 ## Deploy (GitHub Pages)

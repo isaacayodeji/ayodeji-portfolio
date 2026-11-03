@@ -1,11 +1,13 @@
 import { useState } from "react";
 import emailjs from "emailjs-com";
-import { profile } from "../data.js";
-import { Reveal, SectionHead } from "./ui.jsx";
+import { profile, nav } from "../data.js";
+import { Label, Lines, Reveal, Magnetic, Arrow, useLagosTime } from "./ui.jsx";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [state, setState] = useState("idle"); // idle | sending | ok | error
+  const [copied, setCopied] = useState(false);
+  const time = useLagosTime();
 
   const onChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -32,35 +34,77 @@ export default function Contact() {
     }
   };
 
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(profile.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch { /* clipboard blocked; the mailto link still works */ }
+  };
+
   return (
-    <section className="section" id="contact">
-      <div className="container">
-        <SectionHead eyebrow="Contact" title="Let's build something people rely on." sub="Open to remote frontend, mobile and design-system roles. I reply fast." />
+    <section className="contact" id="contact">
+      <div className="section">
+        <Label n="05">Contact</Label>
+        <Lines as="h2" className="contact-title" lines={[<>Let's build</>, <>something people</>, <><em>rely on.</em></>]} />
+
         <div className="contact-grid">
-          <Reveal>
-            <div className="glass contact-info">
-              <a href={`mailto:${profile.email}`}><small>Email</small>{profile.email}</a>
-              <a href={`tel:${profile.phone.replace(/\s/g, "")}`}><small>Phone</small>{profile.phone}</a>
-              <a href={profile.linkedin} target="_blank" rel="noreferrer"><small>LinkedIn</small>ayodeji-olu-ewulo</a>
-              <a href={profile.github} target="_blank" rel="noreferrer"><small>GitHub</small>isaacayodeji</a>
-              <a className="btn primary" href={profile.cv} download>Download CV (PDF)</a>
-            </div>
-          </Reveal>
+          <div className="contact-left">
+            <Reveal as="p" className="contact-lead">
+              Open to remote frontend, mobile and design-system roles. Tell me about the team and the problem. I reply within a day.
+            </Reveal>
+            <Reveal className="email-line">
+              <Magnetic strength={0.15}>
+                <a href={`mailto:${profile.email}`} className="email-big">{profile.email}</a>
+              </Magnetic>
+              <button className="copy" onClick={copy} aria-live="polite">{copied ? "Copied ✓" : "Copy"}</button>
+            </Reveal>
+            <Reveal className="contact-links">
+              <a href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn <Arrow /></a>
+              <a href={profile.github} target="_blank" rel="noreferrer">GitHub <Arrow /></a>
+              <a href={`tel:${profile.phone.replace(/\s/g, "")}`}>{profile.phone}</a>
+              <a href={profile.cv} download>Download CV <Arrow dir="s" /></a>
+            </Reveal>
+          </div>
+
           <Reveal delay={0.08}>
-            <form className="glass form" onSubmit={onSubmit}>
-              <label>Name<input name="name" value={form.name} onChange={onChange} required placeholder="Jane Doe" /></label>
-              <label>Email<input name="email" type="email" value={form.email} onChange={onChange} required placeholder="jane@company.com" /></label>
-              <label>Message<textarea name="message" rows="5" value={form.message} onChange={onChange} required placeholder="Tell me about the role or project…" /></label>
-              <button className="btn primary" disabled={state === "sending"}>{state === "sending" ? "Sending…" : "Send message"}</button>
-              <p className={`form-note ${state}`} role="status">
-                {state === "ok" && "Thanks! Your message is in. I'll reply shortly."}
-                {state === "error" && `Couldn't send. Please email ${profile.email} directly.`}
-              </p>
+            <form className="form" onSubmit={onSubmit}>
+              <label>
+                <span>Your name</span>
+                <input name="name" value={form.name} onChange={onChange} required autoComplete="name" />
+              </label>
+              <label>
+                <span>Email</span>
+                <input name="email" type="email" value={form.email} onChange={onChange} required autoComplete="email" />
+              </label>
+              <label>
+                <span>The role or project</span>
+                <textarea name="message" rows="4" value={form.message} onChange={onChange} required />
+              </label>
+              <div className="form-foot">
+                <button className="btn-solid" disabled={state === "sending"}>
+                  {state === "sending" ? "Sending…" : "Send message"} <Arrow />
+                </button>
+                <p className={`form-note ${state}`} role="status">
+                  {state === "ok" && "Thank you. Your message is in, and I'll reply shortly."}
+                  {state === "error" && `That didn't send. Please email ${profile.email} directly.`}
+                </p>
+              </div>
             </form>
           </Reveal>
         </div>
-        <footer className="footer">© {new Date().getFullYear()} {profile.fullName} · Built with React &amp; Framer Motion</footer>
       </div>
+
+      <footer className="footer">
+        <div className="footer-row">
+          <nav aria-label="Footer">
+            {nav.map((n) => <a key={n.id} href={`#${n.id}`}>{n.label}</a>)}
+          </nav>
+          <p className="tabular">Lagos {time} · © {new Date().getFullYear()} {profile.fullName}</p>
+          <a href="#top" className="to-top">Back to top <Arrow dir="n" /></a>
+        </div>
+        <p className="footer-mark" aria-hidden="true">Olu-Ewulo</p>
+      </footer>
     </section>
   );
 }
