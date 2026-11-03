@@ -36,6 +36,7 @@ export const ticker = [
   "React Native · Expo",
   "Ticketing",
   "Real-time WebSockets",
+  "AI automation",
 ];
 
 export const about = {
@@ -49,6 +50,7 @@ export const about = {
     { k: "Performance is a feature", v: "Code splitting, memoisation and CDN-first delivery for users on slow mobile networks." },
     { k: "One engineer, web and mobile", v: "React, Next.js and Expo, sharing types, patterns and components." },
     { k: "Leave teams faster", v: "Component libraries, lint gates and Storybook docs that cut review time from days to hours." },
+    { k: "AI in the workflow", v: "Agent skills, AGENTS.md standards and AI-readable component docs, so coding agents ship to the same bar as the team." },
   ],
 };
 
@@ -216,6 +218,7 @@ export const capabilities = [
   { group: "Performance & quality", items: "Code splitting, lazy loading, memoisation, Vitest, Playwright, visual regression, cross-browser" },
   { group: "Integration & security", items: "REST, WebSockets, payment gateways, multi-provider orchestration, OWASP, geofencing" },
   { group: "Delivery", items: "Nx, Vite, Webpack, Git, Docker, GitHub Actions, CI/CD, CDN, Vercel, Jira, Agile/Scrum" },
+  { group: "AI automation", items: "Claude Code and GitHub Copilot agent workflows, custom agent skills (CI monitoring, code generation, Figma-to-code), AGENTS.md standards, AI-readable design-system docs" },
 ];
 
 export const credentials = [

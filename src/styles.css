@@ -330,6 +330,7 @@ em { font-style: italic; }
 .caps .section-title { margin-bottom: clamp(40px, 6vw, 80px); }
 .spec { display: grid; grid-template-columns: 1fr 1fr; column-gap: clamp(32px, 5vw, 80px); border-top: 1px solid var(--ink); }
 .spec-row { display: grid; grid-template-columns: 220px 1fr; gap: 20px; padding: 24px 0; border-bottom: 1px solid var(--line-strong); }
+.spec-row:last-child:nth-child(odd) { grid-column: 1 / -1; grid-template-columns: 220px minmax(0, 72ch); }
 .spec dt { font-family: var(--serif); font-size: 1.3rem; letter-spacing: -0.015em; color: var(--ink); display: flex; gap: 14px; align-items: baseline; line-height: 1.2; }
 .spec dt span { font-family: var(--mono); font-size: 11.5px; color: var(--signal); }
 .spec dd { font-size: 15.5px; color: var(--ink-2); line-height: 1.65; }

@@ -30,9 +30,9 @@ export default function Hero({ ready, reduced }) {
           play={ready}
           delay={0.05}
           lines={[
-            <>Interfaces</>,
-            <>for <em>money,</em></>,
-            <>tickets <span className="amp">&amp;</span> trust.</>,
+            <>Reliable</>,
+            <>by <em>design,</em></>,
+            <>fast by default.</>,
           ]}
         />
         <motion.div
@@ -52,7 +52,7 @@ export default function Hero({ ready, reduced }) {
       <div className="hero-foot">
         <motion.p className="hero-lead" {...show(0.45)}>
           I'm Ayodeji, a frontend and mobile engineer with 4+ years building payment checkouts, tax-compliant invoicing
-          and event-ticketing apps. Right now I'm shipping <a href="#eventflutter" className="ink-link">Eventflutter</a>{" "}
+          and event-ticketing apps, with AI agent workflows built into how I ship. Right now I'm shipping <a href="#eventflutter" className="ink-link">Eventflutter</a>{" "}
           on the App Store and Google Play.
         </motion.p>
         <motion.div className="hero-cta" {...show(0.55)}>
