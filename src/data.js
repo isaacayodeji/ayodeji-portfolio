@@ -228,6 +228,7 @@ export const capabilities = [
 
 export const credentials = [
   { k: "Education", v: "B.Sc., Les Cours Sonou University", s: "Cotonou, Benin Republic" },
+  { k: "Certification", v: "Advanced React: Design System, Design Patterns, Performance", s: "Udemy" },
   { k: "Certification", v: "React Developer Certification", s: "" },
   { k: "Certification", v: "JavaScript Algorithms & Data Structures", s: "Udemy" },
   { k: "Languages", v: "English", s: "Fluent" },
