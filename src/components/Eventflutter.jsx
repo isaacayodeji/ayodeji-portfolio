@@ -39,19 +39,18 @@ export default function Eventflutter() {
       </div>
 
       <motion.div className="ef-device" style={{ y: lift, rotateX: rx, rotateY: ry }} aria-hidden="true">
-        <div className="device">
-          <div className="device-screen">
-            <div className="ds-top"><span>Discover</span><span className="ds-dot" /></div>
-            <p className="ds-h">This weekend<br /><em>in Lagos</em></p>
-            <div className="ds-card a"><span>Live · Sat</span><b>Afrobeats Night</b><i>Admit one</i></div>
-            <div className="ds-card b"><span>Sun · 4pm</span><b>Design Meetup</b><i>RSVP</i></div>
-            <div className="ds-tab"><span /><span /><span /><span /></div>
-          </div>
-        </div>
-        <div className="ticket-float">
+        <img
+          className="ef-mockup"
+          src="./assets/eventflutter-mockup.webp"
+          alt=""
+          width="640"
+          height="921"
+          decoding="async"
+        />
+        {/* <div className="ticket-float">
           <span>No. 001</span>
           <b>Admit one</b>
-        </div>
+        </div> */}
       </motion.div>
     </section>
   );

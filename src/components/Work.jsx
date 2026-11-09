@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useMotionValue, useSpring, useScroll, useTransform } from "framer-motion";
+import { AnimatePresence, motion, useMotionValue, useSpring, useScroll, useTransform, useVelocity } from "framer-motion";
 import { projects, archive } from "../data.js";
 import { Label, Lines, Reveal, Arrow, ease } from "./ui.jsx";
 import { lockScroll, unlockScroll } from "../scroll.js";
@@ -10,6 +10,12 @@ export default function Work() {
   const x = useSpring(useMotionValue(0), { stiffness: 260, damping: 28, mass: 0.6 });
   const y = useSpring(useMotionValue(0), { stiffness: 260, damping: 28, mass: 0.6 });
   const listRef = useRef(null);
+  // The preview leans into the direction of travel and settles when the pointer stops.
+  const vx = useVelocity(x);
+  const vy = useVelocity(y);
+  const lean = useSpring(useTransform(vx, [-2500, 2500], [-14, 14], { clamp: true }), { stiffness: 300, damping: 30 });
+  const tilt = useSpring(useTransform(vy, [-2500, 2500], [10, -10], { clamp: true }), { stiffness: 300, damping: 30 });
+  const [origin, setOrigin] = useState(null);
 
   const onMove = (e) => {
     const r = listRef.current.getBoundingClientRect();
@@ -35,8 +41,9 @@ export default function Work() {
               onPointerEnter={() => setHover(i)}
               onFocus={() => setHover(i)}
               onBlur={() => setHover(-1)}
-              onClick={() => setActive(i)}
+              onClick={(e) => { setOrigin(e.currentTarget.getBoundingClientRect()); setActive(i); }}
               aria-haspopup="dialog"
+              data-cursor="View"
             >
               <span className="i-n tabular">{String(i + 1).padStart(2, "0")}</span>
               <span className="i-title">{p.title}</span>
@@ -47,7 +54,7 @@ export default function Work() {
           </Reveal>
         ))}
 
-        <motion.div className="plate" style={{ x, y }} aria-hidden="true">
+        <motion.div className="plate" style={{ x, y, rotate: lean, rotateX: tilt }} aria-hidden="true">
           <AnimatePresence>
             {hover !== -1 && (
               <motion.div
@@ -71,13 +78,17 @@ export default function Work() {
       <Archive />
 
       <AnimatePresence>
-        {active !== null && <CaseStudy p={projects[active]} i={active} onClose={() => setActive(null)} />}
+        {active !== null && <CaseStudy p={projects[active]} i={active} origin={origin} onClose={() => setActive(null)} />}
       </AnimatePresence>
     </section>
   );
 }
 
-function CaseStudy({ p, i, onClose }) {
+// Clip-path inset that matches the clicked row, so the case study grows out of it and shrinks back.
+const fromRect = (o) =>
+  o ? `inset(${o.top}px ${innerWidth - o.right}px ${innerHeight - o.bottom}px ${o.left}px round 12px)` : "inset(100% 0px 0px 0px round 12px)";
+
+function CaseStudy({ p, i, origin, onClose }) {
   const closeRef = useRef(null);
   const panelRef = useRef(null);
 
@@ -107,12 +118,18 @@ function CaseStudy({ p, i, onClose }) {
         role="dialog"
         aria-modal="true"
         aria-labelledby="case-title"
-        initial={{ x: "100%" }}
-        animate={{ x: 0 }}
-        exit={{ x: "100%" }}
-        transition={{ duration: 0.8, ease }}
+        initial={{ clipPath: fromRect(origin) }}
+        animate={{ clipPath: "inset(0px 0px 0px 0px round 0px)" }}
+        exit={{ clipPath: fromRect(origin) }}
+        transition={{ duration: 0.9, ease }}
         data-lenis-prevent
       >
+        <motion.div
+          className="case-inner"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0, transition: { duration: 0.8, delay: 0.35, ease } }}
+          exit={{ opacity: 0, transition: { duration: 0.2 } }}
+        >
         <div className="case-bar">
           <span className="tabular">Project {String(i + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}</span>
           <button ref={closeRef} onClick={onClose} className="case-close">Close <span aria-hidden="true">✕</span></button>
@@ -131,6 +148,7 @@ function CaseStudy({ p, i, onClose }) {
         </ul>
         <h3 className="case-h">Built with</h3>
         <p className="case-stack">{p.stack.join(" / ")}</p>
+        </motion.div>
       </motion.aside>
     </motion.div>
   );
@@ -151,7 +169,7 @@ function Archive() {
       <div className="archive-grid">
         {archive.map((s, i) => (
           <motion.figure key={s.title} className={`shot s${i}`} style={{ y: i % 2 ? b : a }}>
-            <div className="shot-frame">
+            <div className="shot-frame" data-cursor="Look">
               <img src={s.img} alt={`${s.title}, ${s.note}`} loading="lazy" />
             </div>
             <figcaption><span>{s.title}</span><span>{s.note}</span></figcaption>

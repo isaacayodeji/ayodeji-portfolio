@@ -8,6 +8,8 @@ export const profile = {
   linkedin: "https://www.linkedin.com/in/ayodeji-olu-ewulo-a964b924b",
   github: "https://github.com/isaacayodeji",
   cv: "./Isaac_Ayodeji_Olu-Ewulo_CV.pdf",
+  resume: "./resume/",
+  coffee: "https://buymeacoffee.com/isaacayoden",
   playStore: "https://play.google.com/store/apps/details?id=com.eventflutter.app&hl=en",
   appStore: "https://apps.apple.com/us/app/eventflutter/id6774887701",
 };
@@ -40,10 +42,10 @@ export const ticker = [
 ];
 
 export const about = {
-  lead: "I build the screens money moves through, and the apps people buy tickets on.",
+  lead: "I build web and mobile products people trust with their money, time and customers.",
   body: [
-    "For more than four years I've shipped production React, TypeScript and React Native products where a bug isn't an inconvenience: it's a failed payment, a rejected invoice, a customer at a gate who can't get in.",
-    "I own work end to end, from Figma handoff through CI/CD to the App Store, and I leave teams faster than I found them, with design systems, review standards and documentation people actually use.",
+    "For more than four years I've shipped production React, TypeScript and React Native products for fintech, banking, events and marketplace teams: checkouts and invoicing, admin consoles and dashboards, customer websites and apps live on both stores. Payments taught me to build as if every bug costs someone money, and I bring that standard to whatever you're building.",
+    "Bring me a Figma file, a half-finished codebase or just an idea. I'll take it from first commit through CI/CD to launch, keep you informed along the way, and hand over a product your team can keep building on, with design systems, tests and documentation people actually use.",
   ],
   principles: [
     { k: "Money-grade reliability", v: "Race conditions, retries and real-time status are designed in, not patched later." },
@@ -103,7 +105,7 @@ export const eventflutter = {
   facts: [
     { v: "2", l: "App stores" },
     { v: "7", l: "Web apps, one monorepo" },
-    { v: "28", l: "Admin modules" },
+    // { v: "28", l: "Admin modules" },
     { v: "40+", l: "Design-system packages" },
   ],
 };
@@ -207,8 +209,11 @@ export const projects = [
 export const archive = [
   { title: "Xpress Payment Solutions", note: "Corporate website", img: "./assets/xpress-website.png" },
   { title: "Xpress MTS", note: "Product website", img: "./assets/xpress-mts.png" },
-  { title: "Zeeticket", note: "Ticketing interface", img: "./assets/ticketing.png" },
+  // { title: "Zeeticket", note: "Ticketing interface", img: "./assets/ticketing.png" },
   { title: "ABC Bank", note: "Banking app UI", img: "./assets/bank-app.png" },
+  { title: "Eventflutter", note: "Marketing website", img: "./assets/eventflutter-website.png" },
+  { title: "PayXpress", note: "Consumer payments website", img: "./assets/payxpress.png" },
+  { title: "PayXpress Business", note: "Biller service website", img: "./assets/payxpress-business.png" },
 ];
 
 export const capabilities = [

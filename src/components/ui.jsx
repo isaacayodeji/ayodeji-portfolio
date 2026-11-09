@@ -30,8 +30,8 @@ export function Lines({ lines, className = "", delay = 0, as = "h2", play = true
         <span className="line" key={i}>
           <motion.span
             className="line-in"
-            initial={{ y: "108%" }}
-            animate={show ? { y: "0%" } : { y: "108%" }}
+            initial={{ y: "108%", filter: "blur(6px)" }}
+            animate={show ? { y: "0%", filter: "blur(0px)" } : { y: "108%", filter: "blur(6px)" }}
             transition={{ duration: 1.15, delay: delay + i * 0.09, ease }}
           >
             {l}
@@ -106,12 +106,12 @@ export function useLagosTime() {
 export function StoreLinks({ play, apple, inverted = false }) {
   return (
     <div className={`store-links ${inverted ? "inv" : ""}`}>
-      <a href={apple} target="_blank" rel="noreferrer">
+      <Magnetic><a href={apple} target="_blank" rel="noreferrer" data-cursor="Open">
         <span>App Store</span> <Arrow />
-      </a>
-      <a href={play} target="_blank" rel="noreferrer">
+      </a></Magnetic>
+      <Magnetic><a href={play} target="_blank" rel="noreferrer" data-cursor="Open">
         <span>Google Play</span> <Arrow />
-      </a>
+      </a></Magnetic>
     </div>
   );
 }

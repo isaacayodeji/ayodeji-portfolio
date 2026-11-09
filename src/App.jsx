@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { MotionConfig, useReducedMotion } from "framer-motion";
 import { startSmoothScroll, scrollToTarget } from "./scroll.js";
 import Intro from "./components/Intro.jsx";
+import Cursor from "./components/Cursor.jsx";
 import Nav from "./components/Nav.jsx";
 import Hero from "./components/Hero.jsx";
 import About from "./components/About.jsx";
@@ -39,16 +40,24 @@ export default function App() {
     return () => document.removeEventListener("click", onClick);
   }, [reduced]);
 
-  const done = () => {
+  // Hard failsafe: never let the intro block the site for more than a few seconds.
+  useEffect(() => {
+    if (ready) return;
+    const t = setTimeout(() => setReady(true), 3000);
+    return () => clearTimeout(t);
+  }, [ready]);
+
+  const done = useCallback(() => {
     try { sessionStorage.setItem("intro", "1"); } catch { /* storage unavailable */ }
     setReady(true);
-  };
+  }, []);
 
   return (
     <MotionConfig reducedMotion="user">
       <a className="skip" href="#main">Skip to content</a>
       {!ready && <Intro onDone={done} />}
       <div className="grain" aria-hidden="true" />
+      <Cursor />
       <Nav />
       <main id="main">
         <Hero ready={ready} reduced={reduced} />

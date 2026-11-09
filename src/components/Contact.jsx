@@ -29,7 +29,10 @@ export default function Contact() {
       );
       setState("ok");
       setForm({ name: "", email: "", message: "" });
-    } catch {
+    } catch (err) {
+      // EmailJS rejects with { status, text }, e.g. 412 "Gmail_API: Invalid grant" when the Gmail
+      // connection in the EmailJS dashboard needs reconnecting.
+      console.error("Contact form failed to send:", err?.status, err?.text ?? err);
       setState("error");
     }
   };
@@ -55,7 +58,7 @@ export default function Contact() {
             </Reveal>
             <Reveal className="email-line">
               <Magnetic strength={0.15}>
-                <a href={`mailto:${profile.email}`} className="email-big">{profile.email}</a>
+                <a href={`mailto:${profile.email}`} className="email-big" data-cursor="Write">{profile.email}</a>
               </Magnetic>
               <button className="copy" onClick={copy} aria-live="polite">{copied ? "Copied ✓" : "Copy"}</button>
             </Reveal>
@@ -64,6 +67,8 @@ export default function Contact() {
               <a href={profile.github} target="_blank" rel="noreferrer">GitHub <Arrow /></a>
               <a href={`tel:${profile.phone.replace(/\s/g, "")}`}>{profile.phone}</a>
               <a href={profile.cv} download>Download CV <Arrow dir="s" /></a>
+              <a href={profile.resume} target="_blank" rel="noreferrer">View résumé <Arrow /></a>
+              <a href={profile.coffee} target="_blank" rel="noreferrer">Buy me a coffee ☕ <Arrow /></a>
             </Reveal>
           </div>
 

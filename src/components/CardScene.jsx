@@ -21,6 +21,14 @@ import {
   ACESFilmicToneMapping,
 } from "three";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
+import { useTheme } from "../theme.js";
+
+// The card is a physical object, so it keeps a deep army-green stub in both themes; only the
+// orbiting particles follow the page ink so they stay visible on light and dark backgrounds.
+const ARMY = "#4b5320";
+const ARMY_BRIGHT = "#97a35a";
+const cssVar = (name, fallback) =>
+  getComputedStyle(document.documentElement).getPropertyValue(name).trim() || fallback;
 
 const W = 3.4;
 const H = 2.14;
@@ -66,7 +74,7 @@ function drawFace() {
 
   // Ticket stub.
   const stubX = w * 0.76;
-  g.fillStyle = "#ff5a1f";
+  g.fillStyle = ARMY;
   g.fillRect(stubX, 0, w - stubX, h);
   g.strokeStyle = "#171513";
   g.setLineDash([14, 12]);
@@ -82,7 +90,7 @@ function drawFace() {
   g.save();
   g.translate(stubX + (w - stubX) / 2, h / 2);
   g.rotate(-Math.PI / 2);
-  g.fillStyle = "#171513";
+  g.fillStyle = "#f2eee6";
   g.textAlign = "center";
   g.font = "600 30px 'Geist Mono', monospace";
   g.fillText("ADMIT ONE  ·  HIRE ME", 0, -24);
@@ -138,6 +146,7 @@ async function fontsReady() {
 }
 
 export default function CardScene({ reduced }) {
+  const theme = useTheme();
   const host = useRef(null);
   const [failed, setFailed] = useState(false);
 
@@ -188,7 +197,7 @@ export default function CardScene({ reduced }) {
       });
       geo.translate(0, 0, -0.0175);
       const face = new MeshPhysicalMaterial({ map: tex, roughness: 0.42, metalness: 0.1, clearcoat: 1, clearcoatRoughness: 0.22 });
-      const edge = new MeshPhysicalMaterial({ color: "#ff5a1f", roughness: 0.35, metalness: 0.45 });
+      const edge = new MeshPhysicalMaterial({ color: ARMY, roughness: 0.35, metalness: 0.45 });
       const card = new Mesh(geo, [face, edge]);
 
       // A loose orbit of "transactions".
@@ -203,7 +212,7 @@ export default function CardScene({ reduced }) {
       }
       const pgeo = new BufferGeometry();
       pgeo.setAttribute("position", new Float32BufferAttribute(pos, 3));
-      const pmat = new PointsMaterial({ color: "#14120f", size: 0.022, transparent: true, opacity: 0.5, depthWrite: false });
+      const pmat = new PointsMaterial({ color: cssVar("--ink", "#14120f"), size: 0.022, transparent: true, opacity: theme === "dark" ? 0.4 : 0.5, depthWrite: false });
       const orbit = new Points(pgeo, pmat);
       orbit.rotation.x = 0.42;
       orbit.rotation.z = -0.18;
@@ -216,7 +225,7 @@ export default function CardScene({ reduced }) {
       const key = new DirectionalLight("#ffffff", 1.4);
       key.position.set(3, 4, 6);
       scene.add(key);
-      const rim = new PointLight("#ff5a1f", 7, 9);
+      const rim = new PointLight(ARMY_BRIGHT, 7, 9);
       rim.position.set(-4.5, -2.5, 1.2);
       scene.add(rim);
 
@@ -295,7 +304,7 @@ export default function CardScene({ reduced }) {
     })();
 
     return () => { disposed = true; cleanup(); };
-  }, [reduced]);
+  }, [reduced, theme]);
 
   return (
     <div className="card-scene" ref={host} aria-hidden="true">
