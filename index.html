@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ayodeji Olu-Ewulo — Frontend &amp; Mobile Engineer</title>
+    <meta name="description" content="Frontend & mobile engineer building high-traffic payments, fintech and event platforms with React, TypeScript and React Native (Expo). 97% payment success, 40% faster loads." />
+    <meta name="theme-color" content="#f2eee6" />
+    <meta property="og:title" content="Ayodeji Olu-Ewulo — Frontend & Mobile Engineer" />
+    <meta property="og:description" content="React, TypeScript & Expo engineer behind payment checkouts, e-invoicing, and the Eventflutter app on the App Store & Google Play." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="./assets/ayodeji.jpg" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Apply the theme before first paint so there is no light/dark flash. -->
+    <script>
+      (function () {
+        var t;
+        try { t = localStorage.getItem("theme"); } catch (e) {}
+        if (t !== "light" && t !== "dark") t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        document.documentElement.dataset.theme = t;
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <script type="module" crossorigin src="./assets/index-Bn6646iF.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BxlTMY8K.css">
+  </head>
+  <body>
+    <!-- React replaces everything inside #root once the app loads. If you can read this, the source
+         file was opened directly instead of the compiled site. The note stays hidden while the app is
+         still loading (a cold dev-server load can take several seconds) and only appears if React
+         hasn't mounted after 12s, or straight away when the file is opened from disk. -->
+    <style>
+      @keyframes src-note-in { to { visibility: visible; } }
+      .src-note { visibility: hidden; animation: src-note-in 0s 12s forwards; }
+      .src-note.now { animation-delay: 0s; }
+    </style>
+    <div id="root">
+      <div class="src-note" style="font-family:system-ui,sans-serif;color:#3b3732;background:#f2eee6;min-height:100vh;display:grid;place-items:center;padding:24px;text-align:center">
+        <div style="max-width:520px;line-height:1.6">
+          <h1 style="color:#14120f;font-size:22px;margin-bottom:12px">This is the source file, not the built site</h1>
+          <p>Browsers can't run <code>src/main.jsx</code> directly. Start the site with
+            <code style="background:#e4ddd0;padding:2px 8px;border-radius:6px">npm run dev</code>
+            and open the address it prints, or run
+            <code style="background:#e4ddd0;padding:2px 8px;border-radius:6px">npm run build</code> then
+            <code style="background:#e4ddd0;padding:2px 8px;border-radius:6px">npm run preview</code>.</p>
+        </div>
+      </div>
+    </div>
+    <script>
+      if (location.protocol === "file:") document.querySelector(".src-note").classList.add("now");
+    </script>
+  </body>
+</html>
